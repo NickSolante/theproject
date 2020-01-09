@@ -11,24 +11,23 @@ class App extends Component {
     loading: false
   }
 
-  // async componentDidMount() {
-  //   this.setState({ loading: true })
-  //   const res = await axios.get(
-  //     `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-  //   )
+  async componentDidMount() {
+    this.setState({ loading: true })
+    const res = await axios.get(
+      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
 
-  //   console.log(res.data)
-  //   this.setState({ users: res.data, loading: false })
-  // }
+    console.log(res.data)
+    this.setState({ users: res.data, loading: false })
+  }
 
   //text is being passed back via searchusers sent from Search like emit in vue
   searchUsers = async text => {
-    this.setState({ loading: true })
     const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
 
-    this.setState({ users: res.items, loading: false })
+    this.setState({ users: res.data.items, loading: false })
   }
   render() {
     return (
