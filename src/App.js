@@ -5,11 +5,13 @@ import Users from './components/users/Users'
 import Search from './components/users/Search'
 import axios from 'axios'
 import Alert from './components/layout/Alert'
+import About from './components/pages/About'
 import './App.css'
 
 class App extends Component {
   state = {
-    users: [],
+    user: [], //stores single users
+    users: [], //stores all the users taken from search
     loading: false,
     alert: null
   }
@@ -22,6 +24,16 @@ class App extends Component {
 
     console.log(res.data)
     this.setState({ users: res.data, loading: false })
+  }
+
+  // Get single github user
+  getUser = async username => {
+    this.setState({ loading: true })
+    const res = await axios.get(
+      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+
+    this.setState({ users: res.data.items, loading: false })
   }
 
   //text is being passed back via searchusers sent from Search like emit in vue
@@ -70,6 +82,7 @@ class App extends Component {
                   </Fragment>
                 )}
               ></Route>
+              <Route exact path='/about' component={About}></Route>
             </Switch>
           </div>
         </div>
