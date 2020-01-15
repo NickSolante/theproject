@@ -1,10 +1,17 @@
 //Component that stores and takes a single user
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react'
 import PropTypes from 'prop-types'
+import Spinner from '../layout/Spinner'
+import { Link } from 'react-router-dom'
 
 class User extends Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login)
+  }
+  static propTypes = {
+    loading: PropTypes.bool,
+    user: PropTypes.object.isRequired,
+    getUser: PropTypes.func.isRequired
   }
 
   render() {
@@ -17,10 +24,24 @@ class User extends Component {
       login,
       html_url,
       following,
-      followers
+      followers,
+      hireable
     } = this.props.user
     const { loading } = this.props
-    return <div>{name}</div>
+    if (loading) return <Spinner></Spinner>
+    return (
+      <Fragment>
+        <Link to='/' className='btn btn-light'>
+          Back to Search
+        </Link>
+        Hireable: {''}
+        {hireable ? (
+          <i className='fas fa-check text-success' />
+        ) : (
+          <i className='fas fa-times-circle text-danger' />
+        )}
+      </Fragment>
+    )
   }
 }
 
