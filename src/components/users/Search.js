@@ -5,6 +5,14 @@ class Search extends Component {
   state = {
     text: ''
   }
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired
+  }
+
   onChange = e => {
     //using e.target name allows you to access multiple inputs without having to have different onchange functions
     this.setState({ [e.target.name]: e.target.value })
@@ -12,13 +20,12 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault()
-    this.props.searchUsers(this.state.text)
-    this.setState({ text: '' })
-  }
-  static propTypes = {
-    searchUsers: PropTypes.func.isRequired,
-    clearUsers: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired
+    if (this.state.text === '') {
+      this.props.setAlert('Please enter something', 'light')
+    } else {
+      this.props.searchUsers(this.state.text)
+      this.setState({ text: '' })
+    }
   }
 
   render() {
