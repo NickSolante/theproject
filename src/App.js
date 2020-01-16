@@ -14,6 +14,7 @@ class App extends Component {
   state = {
     user: [], //stores single users
     users: [], //stores all the users taken from search
+    repos: [],
     loading: false,
     alert: null
   }
@@ -36,6 +37,16 @@ class App extends Component {
     )
 
     this.setState({ user: res.data, loading: false })
+  }
+
+  //getUserRepos
+  getUserRepos = async username => {
+    this.setState({ loading: true })
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+
+    this.setState({ repos: res.data, loading: false })
   }
 
   //text is being passed back via searchusers sent from Search like emit in vue
@@ -61,7 +72,7 @@ class App extends Component {
   }
 
   render() {
-    const { users, loading, user } = this.state
+    const { users, loading, repos, user } = this.state
     return (
       <Router>
         <div className='App'>
@@ -91,8 +102,10 @@ class App extends Component {
                 render={props => (
                   <User
                     {...props}
+                    getUserRepos={this.getUserRepos}
                     getUser={this.getUser}
                     user={user}
+                    repos={repos}
                     loading={loading}
                   ></User>
                 )}

@@ -1,17 +1,21 @@
 //Component that stores and takes a single user
 import React, { Fragment, Component } from 'react'
 import PropTypes from 'prop-types'
+import Repos from '../repos/Repos'
 import Spinner from '../layout/Spinner'
 import { Link } from 'react-router-dom'
 
 class User extends Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login)
+    this.props.getUserRepos(this.props.match.params.login)
   }
   static propTypes = {
     loading: PropTypes.bool,
     user: PropTypes.object.isRequired,
-    getUser: PropTypes.func.isRequired
+    repos: PropTypes.array.isRequired,
+    getUser: PropTypes.func.isRequired,
+    getUserRepos: PropTypes.func.isRequired
   }
 
   render() {
@@ -30,8 +34,11 @@ class User extends Component {
       public_repos,
       public_gists
     } = this.props.user
-    const { loading } = this.props
+
+    const { loading, repos } = this.props
+
     if (loading) return <Spinner></Spinner>
+
     return (
       <Fragment>
         <Link to='/' className='btn btn-light'>
@@ -96,6 +103,7 @@ class User extends Component {
           <div className='badge badge-primary'> Gists: {public_gists}</div>
           <div className='badge badge-primary'> Repos: {public_repos}</div>
         </div>
+        <Repos repos={repos} />
       </Fragment>
     )
   }
