@@ -17,6 +17,10 @@ const Navbar = ({ icon, title }) => {
           {' '}
           <Link to='/about'>About</Link>
         </li>
+        <li>
+          {' '}
+          <Link to='/advance'>Advanced Search</Link>
+        </li>
       </ul>
     </nav>
   )
