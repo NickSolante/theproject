@@ -13,21 +13,9 @@ import GithubState from './context/github/GithubState'
 import './App.css'
 
 const App = () => {
-  const [user, setUser] = useState({})
-  const [users, setUsers] = useState([])
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState(null)
-
-  // Get single github user
-  const getUser = async username => {
-    setLoading(true)
-    const res = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    )
-    setLoading(false)
-    setUser(res.data)
-  }
 
   //getUserRepos
   const getUserRepos = async username => {
@@ -77,10 +65,7 @@ const App = () => {
                   <User
                     {...props}
                     getUserRepos={getUserRepos}
-                    getUser={getUser}
-                    user={user}
                     repos={repos}
-                    loading={loading}
                   ></User>
                 )}
               ></Route>

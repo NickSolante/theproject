@@ -33,7 +33,7 @@ export default (state, action) => {
     case GET_USER:
       return {
         ...state,
-        loading: true,
+        loading: false,
         user: action.payload
       }
     default:
