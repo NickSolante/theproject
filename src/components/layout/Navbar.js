@@ -11,15 +11,15 @@ const Navbar = ({ icon, title }) => {
       <ul>
         <li>
           {' '}
-          <Link to='/'>Home</Link>
+          <Link to='/theproject/'>Home</Link>
         </li>
         <li>
           {' '}
-          <Link to='/about'>About</Link>
+          <Link to='/theproject/about'>About</Link>
         </li>
         <li>
           {' '}
-          <Link to='/advance'>Advanced Search</Link>
+          <Link to='/theproject/advance'>Advanced Search</Link>
         </li>
       </ul>
     </nav>

@@ -23,16 +23,24 @@ const App = () => {
               <Switch>
                 <Route
                   exact
-                  path='/'
+                  path='/theproject/'
                   render={props => (
                     <Fragment>
                       <Home></Home>
                     </Fragment>
                   )}
                 ></Route>
-                <Route exact path='/about' component={About}></Route>
-                <Route exact path='/user/:login' component={User}></Route>
-                <Route exact path='/advance' component={About}></Route>
+                <Route exact path='/theproject/about' component={About}></Route>
+                <Route
+                  exact
+                  path='/theproject/user/:login'
+                  component={User}
+                ></Route>
+                <Route
+                  exact
+                  path='/theproject/advance'
+                  component={About}
+                ></Route>
                 <Route component={NotFound}></Route>
               </Switch>
             </div>
