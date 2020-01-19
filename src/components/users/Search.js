@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
-import PropTypes from 'prop-types'
 import GithubContext from '../../context/github/githubContext'
-
-const Search = ({ showClear, setAlert }) => {
+import AlertContext from '../../context/alert/alertContext'
+const Search = () => {
   const githubContext = useContext(GithubContext)
+  const alertContext = useContext(AlertContext)
   const [text, setText] = useState('')
 
   const onChange = e => {
@@ -11,7 +11,7 @@ const Search = ({ showClear, setAlert }) => {
     //using e.target name allows you to access multiple inputs without having to have different onchange functions
   }
   const { searchUsers, clearUsers, users } = githubContext
-
+  const { setAlert } = alertContext
   const onSubmit = e => {
     e.preventDefault()
     if (text === '') {
@@ -45,10 +45,6 @@ const Search = ({ showClear, setAlert }) => {
       )}
     </div>
   )
-}
-
-Search.propType = {
-  setAlert: PropTypes.func.isRequired
 }
 
 export default Search

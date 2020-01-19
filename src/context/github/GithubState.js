@@ -9,7 +9,6 @@ import {
   GET_REPOS,
   GET_USER
 } from '../types'
-import { checkPropTypes } from 'prop-types'
 
 const GithubState = props => {
   const initialState = {
