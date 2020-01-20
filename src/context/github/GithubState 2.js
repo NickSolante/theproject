@@ -31,7 +31,6 @@ const GithubState = props => {
       payload: res.data.items
     })
   }
-  //Set Loading
 
   const setLoading = () => dispatch({ type: SET_LOADING })
 
@@ -64,6 +63,8 @@ const GithubState = props => {
 
   //Clear User
   const clearUsers = () => dispatch({ type: CLEAR_USERS })
+
+  //Set Loading
 
   return (
     <GithubContext.Provider
