@@ -9,42 +9,51 @@ import NotFound from './components/pages/NotFound'
 import GithubState from './context/github/GithubState'
 import AlertState from './context/alert/AlertState'
 import './App.css'
+import Greeting from './components/layout/Greeting'
+import TimeState from './context/time/TimeState'
 
 const App = () => {
   return (
     <GithubState>
       <AlertState>
-        <Router>
-          <div className='App'>
-            <Navbar title='Github finder'></Navbar>
-            <div className='container'>
-              <Alert alert={alert}></Alert>
-              <Switch>
-                <Route
-                  exact
-                  path='/theproject/'
-                  render={props => (
-                    <Fragment>
-                      <Home></Home>
-                    </Fragment>
-                  )}
-                ></Route>
-                <Route exact path='/theproject/about' component={About}></Route>
-                <Route
-                  exact
-                  path='/theproject/user/:login'
-                  component={User}
-                ></Route>
-                <Route
-                  exact
-                  path='/theproject/advance'
-                  component={About}
-                ></Route>
-                <Route component={NotFound}></Route>
-              </Switch>
+        <TimeState>
+          <Router>
+            <div className='App'>
+              <Navbar title='Github finder'></Navbar>
+              <div className='container'>
+                <Alert alert={alert}></Alert>
+                <Switch>
+                  <Route
+                    exact
+                    path='/theproject/'
+                    render={props => (
+                      <Fragment>
+                        <Home></Home>
+                        <Greeting />
+                      </Fragment>
+                    )}
+                  ></Route>
+                  <Route
+                    exact
+                    path='/theproject/about'
+                    component={About}
+                  ></Route>
+                  <Route
+                    exact
+                    path='/theproject/user/:login'
+                    component={User}
+                  ></Route>
+                  <Route
+                    exact
+                    path='/theproject/advance'
+                    component={About}
+                  ></Route>
+                  <Route component={NotFound}></Route>
+                </Switch>
+              </div>
             </div>
-          </div>
-        </Router>
+          </Router>
+        </TimeState>
       </AlertState>
     </GithubState>
   )
