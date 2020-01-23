@@ -48,7 +48,6 @@ const GithubState = props => {
     })
   }
 
-  //Get Repos
   //getUserRepos
   const getUserRepos = async username => {
     setLoading(true)
